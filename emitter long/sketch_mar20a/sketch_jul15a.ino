@@ -1,7 +1,7 @@
 // EMISOR (Chip pequeño)
 #include <VirtualWire.h> //incluimos la libreria virtualwire
 
-const int transmit_pin = 12, lento = 2, rapido = 3;
+const int transmit_pin = 11, lento = 2, rapido = 3;
 int lentoVal =0, rapidoVal = 0;
 char *velocity = "";
 void setup()
@@ -26,17 +26,17 @@ void loop()
  //Enviamos "a"
 lentoVal = digitalRead(lento);
 rapidoVal = digitalRead(rapido);
-if(lentoVal == 1 && rapidoVal ==1){
+if(lentoVal == 1 && rapidoVal != 1){
   digitalWrite (13,LOW);
   Serial.println("STOP");  
   velocity = "0";
 }
-else if(lentoVal == 1){
+else if(lentoVal == 1 && rapidoVal == 1){
   digitalWrite (13,HIGH);
   Serial.println("lento");  
   velocity = "1";
 }
-else if(rapidoVal == 1){
+else if(rapidoVal == 1 && lentoVal != 1){
   digitalWrite (13,HIGH);
   Serial.println("rapido");  
   velocity = "2";
